@@ -32,7 +32,7 @@ const oidc = new ExpressOIDC({
   issuer: `https://dev-149346.okta.com/oauth2/default`,
   client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-  redirect_uri: 'https://dev-149346.okta.com/signin/verify/okta/password',
+  redirect_uri: 'https://peaceful-oasis-24168.herokuapp.com/catalog',
   scope: 'openid profile',
   appBaseUrl: 'https://peaceful-oasis-24168.herokuapp.com/catalog'
 });
