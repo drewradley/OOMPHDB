@@ -32,9 +32,9 @@ const oidc = new ExpressOIDC({
   issuer: `https://dev-149346.okta.com/oauth2/default`,
   client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-  redirect_uri: 'https://peaceful-oasis-24168.herokuapp.com/catalog',
+  redirect_uri: 'http://localhost:8080/authorization-code/callback' ||'https://peaceful-oasis-24168.herokuapp.com/authorization-code/callback',
   scope: 'openid profile',
-  appBaseUrl: 'https://peaceful-oasis-24168.herokuapp.com/catalog'
+  appBaseUrl: 'http://localhost:8080' || 'https://peaceful-oasis-24168.herokuapp.com/catalog'
 });
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
@@ -76,7 +76,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 oidc.on('ready', () => {
-  app.listen(8080, () => console.log(`Started 8080!`));
+  app.listen(process.env.PORT ||8080, () => console.log(`Started 8080!`));
 });
 
 oidc.on('error', err => {

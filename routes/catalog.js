@@ -23,9 +23,9 @@ app.use(session({
     issuer: `https://dev-149346.okta.com/oauth2/default`,
     client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID_ADMIN,
     client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-    redirect_uri: 'https://peaceful-oasis-24168.herokuapp.com/catalog',
+    redirect_uri: 'http://localhost:8080/authorization-code/callback' ||'https://peaceful-oasis-24168.herokuapp.com/authorization-code/callback',
   scope: 'openid profile',
-  appBaseUrl: 'https://peaceful-oasis-24168.herokuapp.com/catalog'
+  appBaseUrl: 'http://localhost:8080' || 'https://peaceful-oasis-24168.herokuapp.com/catalog'
   });
   app.use(oidc.router);
 //   oidc.on('ready', () => {
