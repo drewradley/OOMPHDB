@@ -22,7 +22,7 @@ var mongoose = require('mongoose');
 var dev_db_url = `mongodb+srv://drewradley:${process.env.MONGO_PW}@cluster0-xfvkm.mongodb.net/local_library?retryWrites=true&w=majority`;
 
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
-// session support is required to use ExpressOIDC
+// session support is required to use ExpressOIDC 
 app.use(session({
   secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
   resave: true,
