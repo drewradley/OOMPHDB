@@ -24,7 +24,7 @@ var dev_db_url = `mongodb+srv://drewradley:${process.env.MONGO_PW}@cluster0-xfvk
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
 // session support is required to use ExpressOIDC
 app.use(session({
-  secret: process.env.CLIENT_SECRET_ADMIN,
+  secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
   resave: true,
   saveUninitialized: false
 }));

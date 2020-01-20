@@ -15,7 +15,7 @@ const { ExpressOIDC } = require('@okta/oidc-middleware');
 require('dotenv').config({ path: '.env.local' });
 
 app.use(session({
-    secret: process.env.CLIENT_SECRET_ADMIN,
+    secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
     resave: true,
     saveUninitialized: false
   }));
