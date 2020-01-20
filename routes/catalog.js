@@ -7,6 +7,35 @@ var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
 
+//OKTA
+var app = express();
+
+const session = require('express-session');
+const { ExpressOIDC } = require('@okta/oidc-middleware');
+require('dotenv').config({ path: '.env.local' });
+
+app.use(session({
+    secret: process.env.CLIENT_SECRET_ADMIN,
+    resave: true,
+    saveUninitialized: false
+  }));
+  const oidc = new ExpressOIDC({
+    issuer: `https://dev-149346.okta.com/oauth2/default`,
+    client_id: process.env.CLIENT_ID_ADMIN,
+    client_secret: process.env.CLIENT_SECRET_ADMIN,
+    redirect_uri: 'http://localhost:8080/authorization-code/callback',
+    scope: 'openid profile',
+    appBaseUrl: 'http://localhost:8080'
+  });
+  app.use(oidc.router);
+//   oidc.on('ready', () => {
+//     app.listen(8080, () => console.log(`Started 8080!`));
+//   });
+  
+//   oidc.on('error', err => {
+//     console.log('Unable to configure ExpressOIDC', err);
+//   })
+
 /// BOOK ROUTES ///
 
 // GET catalog home page.
@@ -65,7 +94,7 @@ router.get('/authors', author_controller.author_list);
 /// GENRE ROUTES ///
 
 // GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).
-router.get('/genre/create', genre_controller.genre_create_get);
+router.get('/genre/create', oidc.ensureAuthenticated(), genre_controller.genre_create_get);
 
 //POST request for creating Genre.
 router.post('/genre/create', genre_controller.genre_create_post);

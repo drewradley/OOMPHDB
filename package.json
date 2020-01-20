@@ -11,11 +11,14 @@
     "serverstart": "$ENV:DEBUG = 'express-locallibrary-tutorial:*'; npm start run devstart"
   },
   "dependencies": {
+    "@okta/oidc-middleware": "^3.0.0",
     "async": "^3.1.0",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.0",
     "express-validator": "^6.3.1",
     "helmet": "^3.21.2",
     "http-errors": "~1.6.3",
