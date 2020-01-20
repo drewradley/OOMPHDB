@@ -30,8 +30,8 @@ app.use(session({
 }));
 const oidc = new ExpressOIDC({
   issuer: `https://dev-149346.okta.com/oauth2/default`,
-  client_id: process.env.CLIENT_ID_ADMIN,
-  client_secret: process.env.CLIENT_SECRET_ADMIN,
+  client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
   redirect_uri: 'http://localhost:8080/authorization-code/callback',
   scope: 'openid profile',
   appBaseUrl: 'http://localhost:8080'
