@@ -76,7 +76,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 oidc.on('ready', () => {
-  app.listen(process.env.PORT ||8080, () => console.log(`Started 8080!`));
+  app.listen(8080, () => console.log(`Started 8080!`));
 });
 
 oidc.on('error', err => {
