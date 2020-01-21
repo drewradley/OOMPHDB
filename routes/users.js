@@ -1,23 +1,15 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
+var user_controller = require('../controllers/userController');
+//GET request for list of all users.
+router.get('/', user_controller.user_list);
 
 
-// fs.readFile('D:/OOMPHDB/views/test.html', function (err, html) {
-//   if (err) {
-//       throw err; 
-//   }       
-//   http.createServer(function(request, response) {  
-//       response.writeHeader(200, {"Content-Type": "text/html"});  
-//       response.write(html);  
-//       response.end();  
-//   }).listen(3000);
+// router.get('/', function(req, res, next) {
+//   res.send('respond with a resource');
+//   //res.sendFile(path.join(__dirname+'/views/test.html'));
+//   //res.render('test.html')
 // });
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-  //res.sendFile(path.join(__dirname+'/views/test.html'));
-  //res.render('test.html')
-});
 
 module.exports = router;

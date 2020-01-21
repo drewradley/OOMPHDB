@@ -6,35 +6,8 @@ var book_controller = require('../controllers/bookController');
 var author_controller = require('../controllers/authorController');
 var genre_controller = require('../controllers/genreController');
 var book_instance_controller = require('../controllers/bookinstanceController');
+var user_controller = require('../controllers/userController');
 
-//OKTA
-// var app = express();
-
-// const session = require('express-session');
-// const { ExpressOIDC } = require('@okta/oidc-middleware');
-// require('dotenv').config({ path: '.env.local' });
-
-// app.use(session({
-//     secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-//     resave: true,
-//     saveUninitialized: false
-//   }));
-//   const oidc = new ExpressOIDC({
-//     issuer: `https://dev-149346.okta.com/oauth2/default`,
-//     client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID_ADMIN,
-//     client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-//     redirect_uri: 'http://localhost:8080/authorization-code/callback' ||'https://peaceful-oasis-24168.herokuapp.com/authorization-code/callback',
-//   scope: 'openid profile',
-//   appBaseUrl: 'http://localhost:8080' || 'https://peaceful-oasis-24168.herokuapp.com/catalog'
-//   });
-  //app.use(oidc.router);
-//   oidc.on('ready', () => {
-//     app.listen(8080, () => console.log(`Started 8080!`));
-//   });
-  
-//   oidc.on('error', err => {
-//     console.log('Unable to configure ExpressOIDC', err);
-//   })
 
 /// BOOK ROUTES ///
 
@@ -116,6 +89,8 @@ router.get('/genre/:id', genre_controller.genre_detail);
 
 // GET request for list of all Genre.
 router.get('/genres', genre_controller.genre_list);
+// // GET request for list of all Genre.
+// router.get('/users', user_controller.genre_list);
 
 /// BOOKINSTANCE ROUTES ///
 
