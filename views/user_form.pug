@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') User:
+      input#name.form-control(type='text', placeholder='Name' name='name' value=(undefined===user ? '' : user.name))
+      label(for='name') Email:
+      input#name.form-control(type='email', placeholder='email' name='email' value=(undefined===user ? '' : user.email))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+   ul
+    for error in errors
+     li!= error.msg

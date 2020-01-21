@@ -12,6 +12,7 @@ var helmet = require('helmet');
 require('dotenv').config({ path: '.env.local' });
 
 var genre_controller = require('./controllers/genreController');
+var user_controller = require('./controllers/userController');
 
 var app = express();
 const session = require('express-session');
@@ -43,6 +44,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
 app.use('/genre/create',genre_controller.genre_create_get);// oidc.ensureAuthenticated(), 
+app.use('/user/create',user_controller.user_create_get);// oidc.ensureAuthenticated(), 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
