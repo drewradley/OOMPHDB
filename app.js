@@ -14,28 +14,14 @@ require('dotenv').config({ path: '.env.local' });
 var genre_controller = require('./controllers/genreController');
 
 var app = express();
-// const session = require('express-session');
-// const { ExpressOIDC } = require('@okta/oidc-middleware');
+const session = require('express-session');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
 var dev_db_url = `mongodb+srv://drewradley:${process.env.MONGO_PW}@cluster0-xfvkm.mongodb.net/local_library?retryWrites=true&w=majority`;
 
 var mongoDB = process.env.MONGODB_URI || dev_db_url;
-// // session support is required to use ExpressOIDC 
-// app.use(session({
-//   secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-//   resave: true,
-//   saveUninitialized: false
-// }));
-// const oidc = new ExpressOIDC({
-//   issuer: `https://dev-149346.okta.com/oauth2/default`,
-//   client_id: process.env.CLIENT_ID_ADMIN || process.env.MONGODB_CLIENT_ID,
-//   client_secret: process.env.CLIENT_SECRET_ADMIN || process.env.MONGODB_CLIENT_SECRET_ADMIN,
-//   redirect_uri: 'http://localhost:8080/authorization-code/callback' ||'https://peaceful-oasis-24168.herokuapp.com/authorization-code/callback',
-//   scope: 'openid profile',
-//   appBaseUrl: 'http://localhost:8080' || 'https://peaceful-oasis-24168.herokuapp.com/catalog'
-// });
+
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
@@ -52,7 +38,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(oidc.router);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -63,7 +48,6 @@ app.use('/genre/create',genre_controller.genre_create_get);// oidc.ensureAuthent
 app.use(function(req, res, next) {
   next(createError(404));
 });
-//app.get('/genre/create', oidc.ensureAuthenticated());
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -75,11 +59,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-// oidc.on('ready', () => {
-//   app.listen(8080, () => console.log(`Started 8080!`));
-// });
 
-// oidc.on('error', err => {
-//   console.log('Unable to configure ExpressOIDC', err);
-// })
 module.exports = app;
